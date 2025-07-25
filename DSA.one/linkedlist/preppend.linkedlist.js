@@ -1,5 +1,5 @@
 //create linkedlist and prepend 
-
+//O(1) constant time complexcity
 class nod{
     constructor(value){
         this.value = value;
@@ -15,7 +15,7 @@ class linkedlist{
     length(){
         return this.size===0
     }
-    
+    //O(1) constant
     append(value){
       let node = new nod(value)
           if(this.length()){
