@@ -2,8 +2,11 @@
 delete a stirng using recurtion 
 */
 
-function deleteSting(str,value){
-    if(str==="") return "";
-    deleteSting()
-}
+
+
+let one = 10;
+let two = 10;
+
+console.log(one+two);
+
 
