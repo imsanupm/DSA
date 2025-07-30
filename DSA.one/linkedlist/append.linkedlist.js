@@ -1,54 +1,53 @@
-//append linkedlist
-//we are adding new node to the end using the append method
-    //O(n) time complexity
-    
-class nod {
-    constructor(value){
+class Node {
+    constructor(){
         this.value = value;
-        this.next = null
+        this.next = null;
     }
 }
-
 
 class linkedlist{
     constructor(){
         this.head = null;
         this.size = 0;
     }
-    length (){
-        return this.size === 0
-    };
-    //O(n) time complexity
+    isEmpty(){
+        return this.size===0
+    }
     append(value){
-        const node = new nod(value);
-        if(this.length()){
-            this.head = node;
+        const node = new Node(value)
+        if(isEmpty()){
+            this.head = node
         }else{
-            let prev = this.head;
-            while(prev.next){
-                prev = prev.next
+            let current = this.head;
+            while(current.next){
+                current = curren.next;
             }
-            prev.next = node;
+            current.next = node;
         }
         this.size++
     }
-
-    print(){
-        let current = this.head;
-        let value = "";
-        while(current){
-            value=current.value;
-            console.log("values in linkedlist" ,value);
-            
-            current = current.next
-        }
+    deleteNode(index){ //5
+    if(index<0||index>=this.size){
+        console.log("invalid index")
+        return
+    }else{
+         let current = this.head;
+        let deleteItem = null
+       for(let i =0; i<index-1; i++){
+           current = current.next;
+       }
+       deleteItem =  current.next;
+       current.next = deleteItem.next;
     }
+        this.size--
+        console.log(`item deleted From index${this.size+1}`)
+    }
+   
+    
 }
 
-const list = new linkedlist()
+const linkedList = new linkedlist()
 
-list.append(5)
 
-list.append(8)
 
-list.print()
+
