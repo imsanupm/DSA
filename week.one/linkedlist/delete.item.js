@@ -62,6 +62,7 @@ class linkedlist{
         }
     }
     
+    
 }
 
 const list = new linkedlist();
