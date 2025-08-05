@@ -13,3 +13,6 @@ do{
 }while(isCheck)
 
     console.log(arr)
+
+
+    
