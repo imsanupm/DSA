@@ -23,6 +23,9 @@ class queue{
     size(){
         return this.item.length
     }
+    peeek(){
+        return this.item[0];
+    }
 
 }
 const q = new queue();
