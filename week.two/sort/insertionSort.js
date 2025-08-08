@@ -18,4 +18,3 @@ insertionSort(arr);
 console.log(arr);
 
 //if you dont understand anything feel free to write logic in your notebook 
-
