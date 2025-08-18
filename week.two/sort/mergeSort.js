@@ -22,3 +22,4 @@ function merge(leftArr,rightArr) {
 let arr = [5,4,3,2,1];
 console.log(mergeSort(arr));
 //if you don't undersrtand this feel free write the logic on your book and refere the graphycal representation on google
+console.log('hellow my name is sanu');
