@@ -16,6 +16,7 @@ function merge(leftArr,rightArr) {
             empty.push(rightArr.shift());
         }
     }
+    
     return [...empty,...leftArr,...rightArr];
 }
 

@@ -46,7 +46,7 @@ class linkedlist{
     
 }
 
-const linkedList = new linkedlist()
+const list = new linkedlist()
 
 
 
