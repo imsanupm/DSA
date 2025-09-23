@@ -7,7 +7,7 @@ class Node {
 
 class stackUsingLinkedlist {
 
-    constructor (value){
+    constructor (){
       this.head = null;
       this.size = 0;
     };
