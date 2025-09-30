@@ -52,3 +52,7 @@ bt.insert(99);
 bt.insert(323);
 
 console.log(JSON.stringify(bt.root, null, 2));
+
+
+
+

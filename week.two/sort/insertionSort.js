@@ -3,25 +3,21 @@
 let arr = [1, 8, -1, 3, -3, 2, 4];
 
 
-function boubleSort(arr) {
-    let swapped;
-    do {
-        swapped = false;
-        for (let i = 0; i <= arr.length - 1; i++) {
-
-            if (arr[i] > arr[i + 1]) {
-                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-                swapped = true;
-            }
-        }
-    } while (swapped);
-
-    console.log(arr)
-}
 
 
+for(let i = 0; i<arr.length;i ++){
+    let nti = arr[i];
+    let j = i-1;
+    while(j>=0 && arr[j] > nti){
+        arr[j+1] = arr[j];
+        j--
+    };
+    arr[j+1] = nti;
+};
 
-boubleSort(arr)
+
+console.log(arr);
+
 
 
 //if you dont understand anything feel free to write logic in your notebook 
