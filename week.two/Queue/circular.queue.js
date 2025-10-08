@@ -28,7 +28,7 @@ class circularQueue{
         }
         const item = this.item[this.fornt];
         this.item[this.fornt] = null;
-        this.fornt  = this.fornt+1;
+        this.fornt  = (this.fornt+1) % this.capacity;
         this.curentLength -=1
         if(this.isEmpty()){
             this.fornt = -1;
