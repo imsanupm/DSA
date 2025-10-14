@@ -1,199 +1,90 @@
-class node {
-    constructor(key,value){
-        this.key = key
-        this.value = value;
-        this.next = null
+class HashTable {
+    constructor(capacity) {
+        this.buckets = new Array(capacity); // Array to hold key-value pairs (chaining method)
+        this.capacity = capacity;           // Maximum number of slots in the hash table
     }
-}
 
-class HashTable{
-    constructor(size){
-        this.size = size;
-        this.table = new Array(size);
-    }
-    hash(key){
+    // Hash function: convert a key string into an index
+    hash(key) {
         let total = 0;
-        for(let i =0; i<key.length; i++){
-            total+=key.charCodeAt(i);
+        for (let i = 0; i < key.length; i++) {
+            total += key.charCodeAt(i); // Sum ASCII values of characters
         }
-        return total%this.size;
+        return total % this.capacity; // Ensure index falls within capacity
     }
-    set(key,value){
-        const keyToAdd = this.hash(key);
-        if(!this.table[keyToAdd]){
-            this.table [ keyToAdd ] = new node (key,value);
-        }else{
-            let current = this.table[keyToAdd]
-            while(true){
-                if(current.key===key){
-                    current.value = value
-                    return
-                }
-                if(!current.next){
-                    break
-                }
-                current = current.next
-            }
-            current.next = new node(key,value);
-        }
 
+    // Insert or update a key-value pair
+    set(key, value) {
+        const index = this.hash(key);
+        let bucket = this.buckets[index];
+
+        if (!bucket) {
+            // No bucket exists here, create one and store the key-value pair
+            this.buckets[index] = [[key, value]];
+        } else {
+            // Bucket exists, check if key already present
+            let existingEntry = bucket.find(entry => entry[0] === key);
+
+            if (existingEntry) {
+                // Update existing key with new value
+                existingEntry[1] = value;
+            } else {
+                // Insert new key-value pair in the same bucket (collision handled)
+                bucket.push([key, value]);
+            }
+        }
     }
-    
+
+    // Retrieve the value for a given key
+    get(key) {
+        const index = this.hash(key);
+        let bucket = this.buckets[index];
+
+        if (bucket) {
+            // Search inside bucket
+            let entry = bucket.find(item => item[0] === key);
+            return entry ? entry[1] : null; // Return value if found, else null
+        }
+        return null; // Key not found
+    }
+
+    // Delete a key-value pair
+    delete(key) {
+        const index = this.hash(key);
+        let bucket = this.buckets[index];
+
+        if (bucket) {
+            // Find the entry inside bucket
+            let entry = bucket.find(item => item[0] === key);
+            if (entry) {
+                // Remove entry from bucket
+                bucket.splice(bucket.indexOf(entry), 1);
+                return entry; // Return deleted entry
+            }
+        }
+        return null; // Key not found
+    }
+
+    // Print all key-value pairs
+    print() {
+        console.log("HashTable contents:");
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                console.log(`Index ${i}:`, this.buckets[i]);
+            }
+        }
+    }
 }
 
 
+// Example usage
+const table = new HashTable(4);
 
+table.set("name", "sanu");
+table.set("place", "palakkad");
+table.set("work", "developer");
 
-
-
-
-
-
-
-
-
-
-
-
-// // Node for Linked List
-// class Node {
-//     constructor(key, value) {
-//         this.key = key;
-//         this.value = value;
-//         this.next = null;
-//     }
-// }
-
-// // Hash Table with Separate Chaining
-// class HashTable {
-//     constructor(size) {
-//         this.table = new Array(size);
-//         this.size = size;
-//     }
-
-//     // Simple hash function
-//     hash(key) {
-//         let total = 0;
-//         for (let i = 0; i < key.length; i++) {
-//             total += key.charCodeAt(i);
-//         }
-//         return total % this.size;
-//     }
-
-//     // Insert or Update
-//     set(key, value) {
-//         const index = this.hash(key);
-
-//         // If no linked list exists, create one
-//         if (!this.table[index]) {
-//             this.table[index] = new Node(key, value);
-//         } else {
-//             let current = this.table[index];
-//             while (true) {
-//                 if (current.key === key) {
-//                     current.value = value; // Update if key exists
-//                     return;
-//                 }
-//                 if (!current.next) break;
-//                 current = current.next;
-//             }
-//             current.next = new Node(key, value); // Append new node
-//         }
-//     }
-
-//     // Retrieve value
-//     get(key) {
-//         const index = this.hash(key);
-//         let current = this.table[index];
-//         while (current) {
-//             if (current.key === key) {
-//                 return current.value;
-//             }
-//             current = current.next;
-//         }
-//         return undefined;
-//     }
-
-//     // Remove key
-//     remove(key) {
-//         const index = this.hash(key);
-//         let current = this.table[index];
-//         let prev = null;
-
-//         while (current) {
-//             if (current.key === key) {
-//                 if (prev) {
-//                     prev.next = current.next;
-//                 } else {
-//                     this.table[index] = current.next;
-//                 }
-//                 return true;
-//             }
-//             prev = current;
-//             current = current.next;
-//         }
-//         return false;
-//     }
-
-//     // Display hash table
-//     display() {
-//         for (let i = 0; i < this.size; i++) {
-//             let items = [];
-//             let current = this.table[i];
-//             while (current) {
-//                 items.push(`{${current.key}: ${current.value}}`);
-//                 current = current.next;
-//             }
-//             if (items.length > 0) {
-//                 console.log(`${i}: ${items.join(" -> ")}`);
-//             }
-//         }
-//     }
-// }
-
-// // Example Usage
-// const ht = new HashTable(5);
-// ht.set("apple", 100);
-// ht.set("banana", 200);
-// ht.set("grape", 300);
-// ht.set("orange", 400); // may collide with others
-// ht.set("apple", 150); // update
-
-// ht.display();
-
-// console.log("Get banana:", ht.get("banana"));
-// ht.remove("banana");
-// console.log("After removing banana:");
-// ht.display();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+table.print();
+console.log("Get 'name':", table.get("name"));
+console.log("Deleted:", table.delete("name"));
+table.print();
