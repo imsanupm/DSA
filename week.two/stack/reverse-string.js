@@ -1,11 +1,27 @@
-let arr = "hellow";
-let arr1 = arr.split('')
-let reverse = []
+class reverseStringUsingStack{
+    constructor(){
+        this.stack = [];
+    };
+    
+    push(str){
+      let str2 = str.split('');
+      
+      for(let i =0; i<str2.length; i++){
+          this.stack.push(str2[i])
+      };
+    };
+    
+    reverse(){
+        let str =[];
+        while(this.stack.length){
+            str.push(this.stack.pop());
+        };
+        return str.join('')
+    }
+};
 
-while(arr1.length){
-    reverse.push(arr1.pop())
-}
 
-console.log(reverse.join(''))
+const stack = new reverseStringUsingStack();
 
-//this logi is alson using for checking a string is palindrome or not
+stack.push("sanukrishna");
+console.log(stack.reverse())
