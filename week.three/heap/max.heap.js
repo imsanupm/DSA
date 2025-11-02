@@ -1,3 +1,5 @@
+// This implementation behaves as a max heap by default.
+// You can convert it into a min heap by adjusting the comparison condition.
 
 
 function heapify(arr , n, i) {
@@ -25,3 +27,6 @@ function buildMaxheap(arr) {
 };
 
 console.log(buildMaxheap([1,2,3,4,5]));
+
+
+console.log
